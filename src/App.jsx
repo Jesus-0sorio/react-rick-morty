@@ -1,28 +1,49 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { CharactersList } from "./components/CharactersList";
 
 function App() {
+  const [page, setPage] = useState(1);
 
-  const [characters, setCharacters] = useState([])
+  const ButtonPage = () => {
+    return (
+      <div className="flex justify-center items-center">
+        <button
+          id="less"
+          onClick={changePage}
+          className="bg-blue-600 shadow rounded-md text-white px-6 py-1 m-3 text-lg"
+        >
+          {"<"}
+        </button>
+        <span className="text-xl">{page}</span>
+        <button
+          id="plus"
+          onClick={changePage}
+          className="bg-blue-600 shadow rounded-md text-white px-6 py-1 m-3 text-lg"
+        >
+          {">"}
+        </button>
+      </div>
+    );
+  };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        "https://rickandmortyapi.com/api/character"
-      );
-      const data = await response.json();
-      setCharacters(data.results);
-    };
-    fetchData()
-  }, []);
-  return <div className="App">
-    <h1 className="text-4xl text-center my-6">Rick and Morty</h1>
-    <CharactersList characters={characters} />
-    <div className="flex justify-center items-center">
-      <button>{'<'}</button>
-      <button>{'>'}</button>
+  const changePage = (e) => {
+    const result = e.target.id === "plus" ? page + 1 : page - 1;
+    console.log(result);
+
+    if (result > 42) return setPage(1);
+    if (result < 1) return setPage(42);
+    setPage(result);
+  };
+
+  return (
+    <div className="App">
+      <h1 className="text-4xl text-center my-6 md:text-5xl xl:text-6xl 2xl:text-7xl ">
+        Rick and Morty
+      </h1>
+      <CharactersList page={page} />
+      <ButtonPage />
     </div>
-  </div>;
+  );
 }
 
 export default App;
