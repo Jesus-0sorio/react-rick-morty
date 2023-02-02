@@ -34,6 +34,7 @@ export function Character({ character }) {
         visible={showModal}
         handleModal={handleModal}
         character={character}
+        statusCharacter={statusCharacter}
       />
     </div>
   );
