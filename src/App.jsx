@@ -28,8 +28,6 @@ function App() {
 
   const changePage = (e) => {
     const result = e.target.id === "plus" ? page + 1 : page - 1;
-    console.log(result);
-
     if (result > 42) return setPage(1);
     if (result < 1) return setPage(42);
     setPage(result);
@@ -37,7 +35,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="text-4xl text-center my-6 md:text-5xl xl:text-6xl 2xl:text-7xl ">
+      <h1 className="text-4xl border-b-2 text-center mb-4 pb-5 md:text-5xl xl:text-6xl 2xl:text-7xl ">
         Rick and Morty
       </h1>
       <CharactersList page={page} />

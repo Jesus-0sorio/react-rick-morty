@@ -6,7 +6,6 @@ export function CharactersList({ page }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log(page);
     const fetchData = async () => {
       const response = await fetch(
         `https://rickandmortyapi.com/api/character/?page=${page}`
